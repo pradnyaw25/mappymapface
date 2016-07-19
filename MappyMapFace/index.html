@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <style>
+        body {
+            width: 100%;
+        }
+        
+        h3 {
+            padding: 10px;
+        }
+        
+        h4 {
+            padding: 10px;
+        }
+        
+        .rb {
+            position: absolute;
+            border-radius: 25px;
+            background-color: gray;
+            opacity: 0.4;
+            padding: 20px;
+            width: 200px;
+            height: 100px;
+            z-index: 2;
+        }
+        .text {
+            z-index: 3;
+            color: black;
+
+        }
+        
+        #map {
+            top: 0px;
+            left: 0px;
+            width: 99%;
+            height: 600px;
+            /*margin: 0 auto;*/
+            z-index: 1;
+            position: relative;
+
+        }
+    </style>
+</head>
+
+<body>
+    <div class="rb">
+        <div class="text">MappyMapface A google maps playground ! Work in progress.</div>
+        <label><input type="checkbox" value="transit" onclick="setTransitLayer()"> Transit </label>
+        <label><input type="checkbox" value="bars"> Bars </label>
+        <label><input type="checkbox" value="restaurants"> Restaurants </label>
+
+
+    </div>
+    <div id="map"></div>
+    <script>
+        var map;
+        function initMap() {
+            var mapDiv = document.getElementById('map');
+             map = new google.maps.Map(mapDiv, {
+                center: {
+                    lat: 40.7641558,
+                    lng: -73.96631
+                },
+                zoom: 12,
+                styles: [{"featureType":"administrative","elementType":"all","stylers":[{"visibility":"on"},{"lightness":33}]},{"featureType":"landscape","elementType":"all","stylers":[{"color":"#f2e5d4"}]},{"featureType":"poi.park","elementType":"geometry","stylers":[{"color":"#c5dac6"}]},{"featureType":"poi.park","elementType":"labels","stylers":[{"visibility":"on"},{"lightness":20}]},{"featureType":"road","elementType":"all","stylers":[{"lightness":20}]},{"featureType":"road.highway","elementType":"geometry","stylers":[{"color":"#c5c6c6"}]},{"featureType":"road.arterial","elementType":"geometry","stylers":[{"color":"#e4d7c6"}]},{"featureType":"road.local","elementType":"geometry","stylers":[{"color":"#fbfaf7"}]},{"featureType":"water","elementType":"all","stylers":[{"visibility":"on"},{"color":"#acbcc9"}]}]
+            });
+        }
+        function setTransitLayer() {
+            var transitLayer = new google.maps.TransitLayer();
+            transitLayer.setMap(map);
+
+        }
+    </script>
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBsmJeMOh1r5BTiqW3MDuxpnkjz3HTvxtM&callback=initMap">
+    </script>
+</body>
+
+</html>
